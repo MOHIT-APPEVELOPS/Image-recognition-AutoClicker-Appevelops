@@ -15,20 +15,6 @@ import kotlin.math.max
 import kotlin.math.min
 
 class AutoClickAccessibilityService : AccessibilityService() {
-    
-    override fun onServiceConnected() {
-        super.onServiceConnected()
-        // Service connected logic if any
-    }
-
-    override fun onAccessibilityEvent(event: AccessibilityEvent?) {
-        // Handle accessibility events here
-    }
-
-    override fun onInterrupt() {
-        // Required override for accessibility service interruption
-    }
-}
 
     companion object {
         var instance: AutoClickAccessibilityService? = null
@@ -176,6 +162,5 @@ class AutoClickAccessibilityService : AccessibilityService() {
 }
 
 sealed class MacroAction {
-    abstract val delayMs: Long
-    data class Click(val x: Float, val y: Float, override val delayMs: Long) : MacroAction()
+    data class Click(val x: Float, val y: Float, val delayMs: Long) : MacroAction()
 }
