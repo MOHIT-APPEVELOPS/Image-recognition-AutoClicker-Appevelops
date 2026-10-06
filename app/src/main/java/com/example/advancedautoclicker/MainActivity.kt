@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         val btnAccessibility = findViewById<Button>(R.id.btnAccessibility)
         val btnOverlay = findViewById<Button>(R.id.btnOverlay)
         val btnStartService = findViewById<Button>(R.id.btnStartService)
+        val btnStopService = findViewById<Button>(R.id.btnStopService)
 
         // 1. Accessibility Permission
         btnAccessibility?.setOnClickListener {
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // 3. Start Floating Control Service
+        // 3. Start Floating Control Service (App khuli rahegi, panel upar aa jayega)
         btnStartService?.setOnClickListener {
             if (Settings.canDrawOverlays(this)) {
                 val intent = Intent(this, FloatingControlService::class.java)
@@ -42,6 +43,13 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Please grant Overlay Permission first", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        // 4. Stop Floating Control Service
+        btnStopService?.setOnClickListener {
+            val intent = Intent(this, FloatingControlService::class.java)
+            stopService(intent)
+            Toast.makeText(this, "Floating Panel Stopped", Toast.LENGTH_SHORT).show()
         }
     }
 }
