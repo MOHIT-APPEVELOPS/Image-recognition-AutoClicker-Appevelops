@@ -28,7 +28,7 @@ Select a small, distinctive PNG/JPG template. Start recognition and set a thresh
 The matcher is intentionally dependency-free. It samples pixels to reduce CPU load. For production-grade CV, replace TemplateMatcher with OpenCV or another optimized matcher.
 
 ## Macro recorder limitation
-Android's standard AccessibilityService receives accessibility events, not a raw global touch stream. This implementation records view-click events and their screen bounds, then replays them as accessibility gestures.
+Android's standard. AccessibilityService receives accessibility events, not a raw global touch stream. This implementation records view-click events and their screen bounds, then replays them as accessibility gestures.
 
 If you need true raw touch/swipe recording across arbitrary apps, you need a different architecture (for example, an approved input/accessibility approach appropriate to your target device/Android version).
 
