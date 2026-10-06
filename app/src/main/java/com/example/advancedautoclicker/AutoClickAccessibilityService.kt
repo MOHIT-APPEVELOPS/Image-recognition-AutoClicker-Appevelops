@@ -162,5 +162,6 @@ class AutoClickAccessibilityService : AccessibilityService() {
 }
 
 sealed class MacroAction {
-    data class Click(val x: Float, val y: Float, val delayMs: Long) : MacroAction()
+    abstract val delayMs: Long
+    data class Click(val x: Float, val y: Float, override val delayMs: Long) : MacroAction()
 }
