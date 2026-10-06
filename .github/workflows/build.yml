@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
+net-steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -18,8 +18,11 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-
-      - name: Create local.properties
+          
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        
+      - name: Create local.properties for Android SDK
         run: echo "sdk.dir=/usr/local/lib/android/sdk" > local.properties
 
       - name: Generate Fresh Gradle Wrapper
@@ -35,3 +38,4 @@ jobs:
         with:
           name: AutoClicker-debug-apk
           path: app/build/outputs/apk/debug/*.apk
+          
