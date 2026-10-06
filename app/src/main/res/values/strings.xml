@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Advanced Auto Clicker</string>
+    <string name="accessibility_description">Provides click automation, macro playback, and screenshot template matching.</string>
+</resources>
