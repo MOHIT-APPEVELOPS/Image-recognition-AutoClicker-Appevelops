@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:background="@color/background_white" android:layout_height="match_parent" android:layout_width="match_parent" android:padding="16dp" xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="#E3F2FD">
 
-    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:orientation="vertical">
+    <Button
+        android:id="@+id/btnAccessibility"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable Accessibility"
+        android:backgroundTint="#1976D2"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp"/>
 
-        <TextView android:layout_height="wrap_content" android:layout_marginBottom="16dp" android:layout_width="wrap_content" android:text="Advanced Auto Clicker" android:textColor="@color/dark_blue" android:textSize="24sp" android:textStyle="bold"/>
+    <Button
+        android:id="@+id/btnOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Grant Overlay Permission"
+        android:backgroundTint="#1976D2"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp"/>
 
-        <!-- Permissions Section -->
-        <Button android:backgroundTint="@color/primary_blue" android:id="@+id/btnEnableAccessibility" android:layout_height="wrap_content" android:layout_marginBottom="8dp" android:layout_width="match_parent" android:text="Enable Accessibility Service" android:textColor="@color/background_white"/>
+    <Button
+        android:id="@+id/btnStartService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Floating Panel"
+        android:backgroundTint="#1976D2"
+        android:textColor="#FFFFFF"/>
 
-        <Button android:backgroundTint="@color/primary_blue" android:id="@+id/btnOverlayPermission" android:layout_height="wrap_content" android:layout_marginBottom="16dp" android:layout_width="match_parent" android:text="Allow Floating Overlay" android:textColor="@color/background_white"/>
-
-        <!-- Floating Panel Control -->
-        <Button android:backgroundTint="@color/dark_blue" android:id="@+id/btnToggleFloating" android:layout_height="wrap_content" android:layout_marginBottom="24dp" android:layout_width="match_parent" android:text="Show Floating Control Panel" android:textColor="@color/background_white"/>
-
-        <!-- Settings & Repeat Count -->
-        <TextView android:layout_height="wrap_content" android:layout_marginBottom="8dp" android:layout_width="wrap_content" android:text="Automation Settings" android:textColor="@color/primary_blue" android:textSize="16sp" android:textStyle="bold"/>
-
-        <EditText android:hint="Repeat Count (0 for Infinite)" android:id="@+id/etRepeatCount" android:layout_height="wrap_content" android:layout_marginBottom="8dp" android:layout_width="match_parent" android:textColor="@color/text_dark" android:textColorHint="@color/text_muted" inputType="number"/>
-
-        <EditText android:hint="Delay between clicks (ms)" android:id="@+id/etDelay" android:layout_height="wrap_content" android:layout_marginBottom="16dp" android:layout_width="match_parent" android:textColor="@color/text_dark" android:textColorHint="@color/text_muted" inputType="number"/>
-
-        <!-- Action Controls -->
-        <Button android:backgroundTint="@color/primary_blue" android:id="@+id/btnStartAutomation" android:layout_height="wrap_content" android:layout_marginBottom="8dp" android:layout_width="match_parent" android:text="Start Multi-Point / Automation" android:textColor="@color/background_white"/>
-
-        <Button android:backgroundTint="@color/accent_blue" android:id="@+id/btnStopAutomation" android:layout_height="wrap_content" android:layout_marginBottom="24dp" android:layout_width="match_parent" android:text="Stop Automation" android:textColor="@color/background_white"/>
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>
