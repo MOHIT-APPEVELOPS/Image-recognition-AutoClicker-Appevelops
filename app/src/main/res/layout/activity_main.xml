@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#101114">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Advanced Auto Clicker"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Accessibility: OFF"
+            android:textColor="#B9BEC9"
+            android:textSize="15sp"/>
+
+        <Button
+            android:id="@+id/accessibilityButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Enable Accessibility Service"/>
+
+        <Button
+            android:id="@+id/overlayButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Allow Floating Overlay"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Auto Click"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/xInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="X coordinate"
+            android:inputType="numberDecimal"
+            android:textColor="#FFFFFF"
+            android:hintTextColor="#777B86"/>
+
+        <EditText
+            android:id="@+id/yInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Y coordinate"
+            android:inputType="numberDecimal"
+            android:textColor="#FFFFFF"
+            android:hintTextColor="#777B86"/>
+
+        <EditText
+            android:id="@+id/intervalInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Interval (ms)"
+            android:inputType="number"
+            android:text="500"
+            android:textColor="#FFFFFF"
+            android:hintTextColor="#777B86"/>
+
+        <Button
+            android:id="@+id/startClickButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Start Auto Click"/>
+
+        <Button
+            android:id="@+id/stopClickButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stop Auto Click"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Image Recognition"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/selectTemplateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Template Image"/>
+
+        <EditText
+            android:id="@+id/thresholdInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Match threshold (0.0 - 1.0)"
+            android:text="0.90"
+            android:inputType="numberDecimal"
+            android:textColor="#FFFFFF"
+            android:hintTextColor="#777B86"/>
+
+        <Button
+            android:id="@+id/startRecognitionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Image Recognition"/>
+
+        <Button
+            android:id="@+id/stopRecognitionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stop Recognition"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Macro Recorder"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/macroNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Macro name"
+            android:textColor="#FFFFFF"
+            android:hintTextColor="#777B86"/>
+
+        <Button
+            android:id="@+id/startRecordButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Recording"/>
+
+        <Button
+            android:id="@+id/stopRecordButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stop Recording"/>
+
+        <Button
+            android:id="@+id/playMacroButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Play Last Macro"/>
+
+        <TextView
+            android:id="@+id/macroStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:text="No macro recorded."
+            android:textColor="#B9BEC9"/>
+
+    </LinearLayout>
+</ScrollView>
