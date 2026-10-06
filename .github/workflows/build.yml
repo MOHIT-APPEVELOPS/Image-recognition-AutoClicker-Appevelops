@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -24,9 +24,19 @@ jobs:
           gradle-version: 8.10.2
 
       - name: Build Debug APK
-        run: gradle assembleDebug --stacktrace --no-daemon
+        run: |
+          set -o pipefail
+          gradle assembleDebug --console=plain --no-daemon 2>&1 | tee build.log
+
+      - name: Show only the real error
+        if: failure()
+        run: |
+          grep -E "^e: |error:|What went wrong" -A4 build.log | head -40 | while IFS= read -r line; do
+            echo "::error::$line"
+          done
 
       - name: Upload APK Artifact
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: AutoClicker-debug-apk
