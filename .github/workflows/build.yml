@@ -18,10 +18,7 @@ net-steps:
         with:
           distribution: 'temurin'
           java-version: '17'
-          
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-        
+      
       - name: Create local.properties for Android SDK
         run: echo "sdk.dir=/usr/local/lib/android/sdk" > local.properties
 
