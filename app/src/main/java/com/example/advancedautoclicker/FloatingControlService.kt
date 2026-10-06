@@ -3,45 +3,57 @@ package com.example.advancedautoclicker
 import android.app.Service
 import android.content.Intent
 import android.graphics.PixelFormat
+import android.os.Build
 import android.os.IBinder
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
-import android.widget.ImageButton
+import android.widget.Button
+import android.widget.Toast
 
 class FloatingControlService : Service() {
 
-    private lateinit var windowManager: WindowManager
-    private lateinit var floatingView: View
-    private val clickPoints = mutableListOf<Pair<Float, Float>>()
+    private var windowManager: WindowManager? = null
+    private var floatingView: View? = null
 
-    override fun onBind(intent: Intent?): IBinder? = null
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
+    }
 
     override fun onCreate() {
         super.onCreate()
+
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
-        floatingView = LayoutInflater.from(this).inflate(R.layout.floating_control_panel, null)
+        
+        // Layout inflate karein (ensure karein ki floating_view.xml bani ho)
+        floatingView = LayoutInflater.from(this).inflate(R.layout.activity_main, null) // ya aap alag floating layout bhi use kar sakte hain
+
+        val layoutFlag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+        } else {
+            WindowManager.LayoutParams.TYPE_PHONE
+        }
 
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
-            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+            layoutFlag,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
             PixelFormat.TRANSLUCENT
-        ).apply {
-            gravity = Gravity.TOP or Gravity.START
-            x = 100
-            y = 100
-        }
+        )
 
-        // Panel ko screen par drag karne ke liye touch listener
-        floatingView.setOnTouchListener(object : View.OnTouchListener {
-            var initialX = 0
-            var initialY = 0
-            var initialTouchX = 0f
-            var initialTouchY = 0f
+        params.gravity = Gravity.TOP or Gravity.START
+        params.x = 100
+        params.y = 100
+
+        // Touch listener se floating view ko drag karne ki suvidha
+        floatingView?.setOnTouchListener(object : View.OnTouchListener {
+            private var initialX = 0
+            private var initialY = 0
+            private var initialTouchX = 0f
+            private var initialTouchY = 0f
 
             override fun onTouch(v: View, event: MotionEvent): Boolean {
                 when (event.action) {
@@ -55,7 +67,7 @@ class FloatingControlService : Service() {
                     MotionEvent.ACTION_MOVE -> {
                         params.x = initialX + (event.rawX - initialTouchX).toInt()
                         params.y = initialY + (event.rawY - initialTouchY).toInt()
-                        windowManager.updateViewLayout(floatingView, params)
+                        windowManager?.updateViewLayout(floatingView, params)
                         return true
                     }
                 }
@@ -63,39 +75,17 @@ class FloatingControlService : Service() {
             }
         })
 
-        // 1. Add Point Button Action
-        floatingView.findViewById<ImageButton>(R.id.btnAddPoint)?.setOnClickListener {
-            clickPoints.add(Pair(500f, 800f))
+        try {
+            windowManager?.addView(floatingView, params)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-
-        // 2. Play Button Action
-        floatingView.findViewById<ImageButton>(R.id.btnPlay)?.setOnClickListener {
-            AutoClickAccessibilityService.instance?.startMultiPointClick(clickPoints, 500L, true, 0)
-        }
-
-        // 3. Pause Button Action
-        floatingView.findViewById<ImageButton>(R.id.btnPause)?.setOnClickListener {
-            AutoClickAccessibilityService.instance?.stopAutomation()
-        }
-
-        // 4. Stop Button Action
-        floatingView.findViewById<ImageButton>(R.id.btnStop)?.setOnClickListener {
-            AutoClickAccessibilityService.instance?.stopAutomation()
-            clickPoints.clear()
-        }
-
-        // 5. Close Panel Button Action
-        floatingView.findViewById<ImageButton>(R.id.btnClose)?.setOnClickListener {
-            stopSelf()
-        }
-
-        windowManager.addView(floatingView, params)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if (::floatingView.isInitialized) {
-            windowManager.removeView(floatingView)
+        if (floatingView != null) {
+            windowManager?.removeView(floatingView)
         }
     }
 }
