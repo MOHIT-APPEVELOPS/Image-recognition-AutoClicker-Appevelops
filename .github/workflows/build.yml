@@ -1,11 +1,14 @@
 name: Build Android APK
+
 on:
   push:
     branches: [ "main", "master" ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps
+
+    steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
