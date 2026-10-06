@@ -19,6 +19,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Create local.properties for Android SDK
+        run: echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+
       - name: Generate Fresh Gradle Wrapper
         run: |
           gradle wrapper --gradle-version 8.10
