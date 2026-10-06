@@ -134,24 +134,28 @@ class AutoClickAccessibilityService : AccessibilityService() {
                 Display.DEFAULT_DISPLAY,
                 mainExecutor,
                 object : TakeScreenshotCallback {
-                    override fun onSuccess(screenshot: ScreenshotResult) {
-                        val hardwareBitmap = Bitmap.wrapHardwareBuffer(
-                            screenshot.hardwareBuffer,
-                            screenshot.colorSpace
-                        )
-                        val mutableBitmap = hardwareBitmap?.copy(Bitmap.Config.ARGB_8888, false)
-                        hardwareBuffer?.close()
+                    override fun onSuccess(screenshot: android.accessibilityservice.AccessibilityService.ScreenshotResult) {
+    val hardwareBitmap = Bitmap.wrapHardwareBuffer(
+        screenshot.hardwareBuffer,
+        screenshot.colorSpace
+    )
+    
+    val mutableBitmap = hardwareBitmap?.copy(Bitmap.Config.ARGB_8888, true)
+    
+    // Yahan hardwareBuffer ki jagah screenshot.hardwareBuffer likhna hai
+    screenshot.hardwareBuffer?.close()
 
-                        if (mutableBitmap != null && templateBitmap != null) {
-                            val matchPoint = findTemplateMatch(mutableBitmap, templateBitmap!!)
-                            if (matchPoint != null) {
-                                // Image milne par wahan click karein
-                                click(matchPoint.first, matchPoint.second)
-                            }
-                        }
-                        // Agle scan ke liye delay
-                        handler.postDelayed({ runImageRecognitionLoop() }, 1000)
-                    }
+    if (mutableBitmap != null && templateBitmap != null) {
+        val matchPoint = findTemplateMatch(mutableBitmap, templateBitmap!!)
+        if (matchPoint != null) {
+            // Image milne par wahan click karein
+            click(matchPoint.first, matchPoint.second)
+        }
+    }
+    
+    // Agle scan ke liye delay
+    handler.postDelayed({ runImageRecognitionLoop() }, 1000)
+}
 
                     override fun onFailure(errorCode: Int) {
                         handler.postDelayed({ runImageRecognitionLoop() }, 2000)
