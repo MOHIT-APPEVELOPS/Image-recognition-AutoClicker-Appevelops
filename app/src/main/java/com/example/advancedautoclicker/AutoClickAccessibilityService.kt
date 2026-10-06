@@ -164,3 +164,6 @@ class AutoClickAccessibilityService : AccessibilityService() {
 sealed class MacroAction {
     data class Click(val x: Float, val y: Float, val delayMs: Long) : MacroAction()
 }
+    override fun onInterrupt() {
+        // Required override for accessibility service interruption
+    }
